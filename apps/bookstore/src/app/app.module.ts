@@ -4,9 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
+import { DiscountPipe } from './discount.pipe';
+import { ChangeColorDirective } from './change-color.directive';
 
 @NgModule({
-  declarations: [AppComponent, BookComponent],
+  declarations: [AppComponent, BookComponent, DiscountPipe, ChangeColorDirective],
   imports: [BrowserModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
