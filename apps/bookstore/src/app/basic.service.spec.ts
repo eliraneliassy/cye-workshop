@@ -3,18 +3,35 @@ import { TestBed } from '@angular/core/testing';
 
 import { BasicService } from './basic.service';
 
-// describe('BasicService', () => {
-//   let service: BasicService;
+describe('BasicService', () => {
+  let service: BasicService;
+  let loggerService: LoggerService
 
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({});
-//     service = TestBed.inject(BasicService);
-//   });
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      
+    });
+    service = TestBed.inject(BasicService);
+    loggerService = TestBed.inject(LoggerService);
+  });
 
-//   it('should be created', () => {
-//     expect(service).toBeTruthy();
-//   });
-// });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('Should return sum of 2 paramaters', () => {
+    
+
+    jest.spyOn(loggerService, 'log');
+
+    const result = service.plus(2, 3);
+
+    expect(loggerService.log).toHaveBeenCalledTimes(1);
+
+    expect(result).toBe(5);
+  })
+
+});
 
 describe('BasicService', () => {
   it('Should return sum of 2 paramaters', () => {
