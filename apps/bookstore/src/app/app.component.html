@@ -1,4 +1,4 @@
-<div *ngIf="books$ | async as books">
-    <cye-workshop-book [book]="book" *ngFor="let book of books" 
+
+    <cye-workshop-book [book]="book" *ngFor="let book of books$ | async" 
     class="book"></cye-workshop-book>
-</div>
+
