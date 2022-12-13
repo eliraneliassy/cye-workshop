@@ -1,5 +1,8 @@
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Book } from './book.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +13,20 @@ export class BooksService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getBooks(term: string) {
+  getBooks(term: string): Observable<Book[]> {
     term = term.toLowerCase();
     let params: HttpParams = new HttpParams();
     params = params.append('q', term);
 
-    return this.httpClient.get(this.BASE_URL, { params });
+    return this.httpClient.get<any[]>(this.BASE_URL, { params })
+      .pipe(
+        map((res: any) => res.items),
+        map((items: any[]) => items.map((item: any) => ({
+          title: item.volumeInfo.title,
+          previewImgUrl: item.volumeInfo.imageLinks.thumbnail,
+          price: item.volumeInfo.pageCount
+        })))
+      );
   }
 
 
